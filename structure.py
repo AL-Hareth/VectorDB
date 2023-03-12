@@ -38,6 +38,6 @@ class Database:
     def get_vectors(self):
         return self.vectors.keys()
     
-    def inner(self, vec1: Vector, vec2: Vector):
-        return np.inner(vec1.show(), vec2.show())
+    def get_vector(self, vector_id):
+        return self.vectors[vector_id]
 
