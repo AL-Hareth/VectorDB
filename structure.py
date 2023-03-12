@@ -27,6 +27,11 @@ class Vector:
                 selected.append(self.values[i])
         return selected
 
+    def remove_value(self, value):
+        remove_indecies = list(np.where(self.values == value)[0])
+        self.values = np.delete(self.values, remove_indecies)
+
+
 class Database:
     
     vectors = {}
