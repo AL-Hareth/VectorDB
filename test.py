@@ -24,3 +24,12 @@ create_user(750);
 
 print(db.vectors["users"].show())
 print(db.vectors["permissions"].show())
+
+# Create relation between two vectors
+db.create_relation(users_vector, permissions_vector)
+print("Users Relation: " + db.get_relation_of_vector(users_vector))
+print("Permissions Relation: " + db.get_relation_of_vector(permissions_vector))
+
+# Drops the users vector
+db.drop_vector('users')
+print(db.get_vectors())

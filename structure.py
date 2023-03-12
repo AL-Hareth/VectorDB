@@ -3,8 +3,10 @@ import numpy as np
 class Vector:
     id: str
     default_value: list
+    relation: str = ""
     values = np.array([])
-    def __init__(self, id, default_value):
+
+    def __init__(self, id: str, default_value: list):
         self.id = id
         self.default_value = default_value
         self.values = np.array(self.default_value)
@@ -32,12 +34,26 @@ class Database:
     def __init__(self, name):
         self.name = name
     
-    def create_vector(self, id, default_values: list):
+    def create_vector(self, id: str, default_values: list) -> None:
         self.vectors[id] = Vector(id, default_values)
 
     def get_vectors(self):
         return self.vectors.keys()
     
-    def get_vector(self, vector_id):
+    def get_vector(self, vector_id: str) -> Vector:
         return self.vectors[vector_id]
+    
+    def drop_vector(self, vector_id: str) -> None:
+        self.vectors.__delitem__(vector_id)
 
+    def create_relation(self, first_vector: Vector, second_vector: Vector):
+        if (first_vector.relation != "") or (second_vector.relation != ""):
+            return RuntimeError('One of the Vectors is already related to another vector')
+        else:
+            first_vector.relation = second_vector.id
+            second_vector.relation = first_vector.id
+    
+    def get_relation_of_vector(self, vector: Vector) -> str:
+        if vector.relation != "":
+            return vector.relation
+        return "This Vector has no relations!"
