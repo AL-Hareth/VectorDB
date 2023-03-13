@@ -35,9 +35,6 @@ class Vector:
 
 class UnitVector(Vector):
 
-    id: str
-    values: np.ndarray
-
     def __init__(self, id: str, default_value: list) -> None:
         for i in list(set(default_value)):
             if not (i == 1 or i == 0):
